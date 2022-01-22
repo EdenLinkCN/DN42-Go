@@ -15,6 +15,8 @@ read -p "DN42 IPv4 Address : " OWNIP
 read -p "DN42 IPv6 Address : " OWNIPv6
 
 # Update System and install packages
+apt update
+apt install python-software-properties
 add-apt-repository ppa:cz.nic-labs/bird
 apt update
 apt upgrade -y
