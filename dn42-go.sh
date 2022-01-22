@@ -16,8 +16,8 @@ read -p "DN42 IPv6 Address : " OWNIPv6
 
 # Update System and install packages
 apt update
-apt install  software-properties-common
-add-apt-repository ppa:cz.nic-labs/bird
+apt install software-properties-common curl -y
+add-apt-repository ppa:cz.nic-labs/bird -y
 apt update
 apt upgrade -y
 apt install bird2 wireguard babeld -y
