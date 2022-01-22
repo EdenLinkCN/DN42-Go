@@ -18,7 +18,7 @@ read -p "DN42 IPv6 Address : " OWNIPv6
 add-apt-repository ppa:cz.nic-labs/bird
 apt update
 apt upgrade -y
-apt install bird wireguard babeld -y
+apt install bird2 wireguard babeld -y
 
 # Write things before download
 echo "define OWNAS = ${OWNAS};\ndefine OWNIP = ${OWNIP};\ndefine OWNIPv6 = ${OWNIPv6};\ndefine OWNNET = ${OWNNET};\ndefine OWNNETv6 = ${OWNNETv6};\ndefine OWNNETSET = [${OWNNET}+];\ndefine OWNNETSETv6 = [${OWNNETv6}+]\n\n " > /tmp/bird.conf
