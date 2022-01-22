@@ -34,6 +34,16 @@ echo "net.ipv4.conf.default.rp_filter=0" >> /etc/sysctl.conf
 echo "net.ipv4.conf.all.rp_filter=0" >> /etc/sysctl.conf
 sysctl -p
 
+# wireguard keygen
+wg genkey | tee privatekey | wg pubkey > /tmp/publickey
+mkdir /root/wgkey/peers -p
+mv /tmp/privatekey /root/wgkey/peers
+mv /tmp/publickey /root/wgkey/peers
+wg genkey | tee privatekey | wg pubkey > /tmp/publickey
+mkdir /root/wgkey/nodes -p
+mv /tmp/privatekey /root/wgkey/nodes
+mv /tmp/publickey /root/wgkey/nodes
+
 # turn on bird service
 rm /etc/bird/bird.conf
 mv /tmp/bird.conf /etc/bird/bird.conf
