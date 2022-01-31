@@ -57,7 +57,13 @@ mkdir /root/wgkey/nodes -p
 mv /tmp/privatekey /root/wgkey/nodes
 mv /tmp/publickey /root/wgkey/nodes
 
-# turn on bird service
+# Ping Latency
+
+# wireguard connect
+
+# write dnnodes & push node information
+
+# turn on bird / babeld service 
 rm /etc/bird/bird.conf
 mv /tmp/bird.conf /etc/bird/bird.conf
 mkdir /etc/bird/peers
