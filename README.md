@@ -1,7 +1,5 @@
-# DN42-Go Branch Config
-Origin: https://github.com/Eden7Ba23/DN42-Config
+# DN42-Go NodeInfo Branch
 
-Pre-Written Config for My DN42 Nodes.(AS4242423025,babeld+iBGP FullMesh)
+Storage Node Information here.
 
-Easy your peer with others / Easy your node connect
-
+use with dn42-go.sh at main branch
