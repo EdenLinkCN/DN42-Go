@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # -----------------------------------
 # DN42-Go By EdenJohnson
 # For AS4242423025
@@ -17,8 +17,7 @@ apt install bird2 wireguard babeld -y
 # Define things
 curl https://raw.githubusercontent.com/Eden7Ba23/DN42-Go/nodeinfo/nodeinfo.conf >> /tmp/nodeinfo-base64.conf
 base64 -d /tmp/nodeinfo-base64.conf > /tmp/nodeinfo.conf
-LAST=$(sed -n $(awk '{print NR}' nodeinfo-debase.conf|tail -n1)p nodeinfo-debase.conf|cut -d '|' -f1)
-
+LAST=$(sed -n $(awk '{print NR}' /tmp/nodeinfo.conf|tail -n1)p /tmp/nodeinfo.conf|cut -d '|' -f1)
 OWNAS="4242423025"
 OWNNET="172.23.131.224/27"
 OWNNETv6="fddd:5002:6646::/48"
@@ -35,7 +34,7 @@ fi
 
 
 # Write things before download
-echo "define OWNAS = ${OWNAS};\ndefine OWNIP = ${OWNIP};\ndefine OWNIPv6 = ${OWNIPv6};\ndefine OWNNET = ${OWNNET};\ndefine OWNNETv6 = ${OWNNETv6};\ndefine OWNNETSET = [${OWNNET}+];\ndefine OWNNETSETv6 = [${OWNNETv6}+];\n\n " > /tmp/bird.conf
+echo -e "define OWNAS = ${OWNAS};\ndefine OWNIP = ${OWNIP};\ndefine OWNIPv6 = ${OWNIPv6};\ndefine OWNNET = ${OWNNET};\ndefine OWNNETv6 = ${OWNNETv6};\ndefine OWNNETSET = [${OWNNET}+];\ndefine OWNNETSETv6 = [${OWNNETv6}+];\n\n " > /tmp/bird.conf
 
 # Download birdconfig from Internet
 curl https://raw.githubusercontent.com/Eden7Ba23/DN42-Go/main/bird.conf >> /tmp/bird.conf
