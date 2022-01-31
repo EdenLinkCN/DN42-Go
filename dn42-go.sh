@@ -2,19 +2,9 @@
 # -----------------------------------
 # DN42-Go By EdenJohnson
 # For AS4242423025
-# config for bird
 # if you want to deploy on other server
 # change the things in the define block
 # -----------------------------------
-
-# Define things
-git clone -b nodeinfo httsp://github.com/Eden7Ba23/DN42-Go
-OWNAS="4242423025"
-OWNNET="172.23.131.224/27"
-OWNNETv6="fddd:5002:6646::/48"
-
-read -p "DN42 IPv4 Address : " OWNIP
-read -p "DN42 IPv6 Address : " OWNIPv6
 
 # Update System and install packages
 apt update
@@ -24,10 +14,30 @@ apt update
 apt upgrade -y
 apt install bird2 wireguard babeld -y
 
+# Define things
+curl https://raw.githubusercontent.com/Eden7Ba23/DN42-Go/nodeinfo/nodeinfo.conf >> /tmp/nodeinfo-base64.conf
+base64 -d /tmp/nodeinfo-base64.conf > /tmp/nodeinfo.conf
+LAST=$(sed -n $(awk '{print NR}' nodeinfo-debase.conf|tail -n1)p nodeinfo-debase.conf|cut -d '|' -f1)
+
+OWNAS="4242423025"
+OWNNET="172.23.131.224/27"
+OWNNETv6="fddd:5002:6646::/48"
+read -r -p "Do you want to config Node IP automaticly? [y/N] " HowIPInput
+if [[ "$HowIPInput" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    OWNIP=$(expr $LAST + 224)
+    OWNIPv6="fddd:5002:6646::$(expr $LAST + 1)"
+else
+    read -p "DN42 IPv4 Address : " OWNIP
+    read -p "DN42 IPv6 Address : " OWNIPv6
+fi
+
+
+
 # Write things before download
 echo "define OWNAS = ${OWNAS};\ndefine OWNIP = ${OWNIP};\ndefine OWNIPv6 = ${OWNIPv6};\ndefine OWNNET = ${OWNNET};\ndefine OWNNETv6 = ${OWNNETv6};\ndefine OWNNETSET = [${OWNNET}+];\ndefine OWNNETSETv6 = [${OWNNETv6}+];\n\n " > /tmp/bird.conf
 
-# Download common things from Internet
+# Download birdconfig from Internet
 curl https://raw.githubusercontent.com/Eden7Ba23/DN42-Go/main/bird.conf >> /tmp/bird.conf
 
 # Turn off some settings
