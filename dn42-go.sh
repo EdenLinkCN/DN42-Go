@@ -8,9 +8,11 @@
 # -----------------------------------
 
 # Define things
+git clone -b nodeinfo httsp://github.com/Eden7Ba23/DN42-Go
 OWNAS="4242423025"
 OWNNET="172.23.131.224/27"
 OWNNETv6="fddd:5002:6646::/48"
+
 read -p "DN42 IPv4 Address : " OWNIP
 read -p "DN42 IPv6 Address : " OWNIPv6
 
